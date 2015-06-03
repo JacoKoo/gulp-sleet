@@ -1,0 +1,32 @@
+{
+  "name": "gulp-sleet",
+  "version": "0.0.1",
+  "description": "compile sleet files with gulp",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/JacoKoo/gulp-sleet.git"
+  },
+  "keywords": [
+    "sleet",
+    "gulp",
+    "compile",
+    "gulpplugin"
+  ],
+  "author": "Jaco Koo <jaco.koo@guyong.in>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/JacoKoo/gulp-sleet/issues"
+  },
+  "homepage": "https://github.com/JacoKoo/gulp-sleet",
+  "dependencies": {
+    "deepmerge": "^0.2.10",
+    "gulp-util": "^3.0.5",
+    "sleet": "0.0.11",
+    "sleet-handlebars": "0.0.11",
+    "through2": "^0.6.5"
+  }
+}
