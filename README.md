@@ -39,4 +39,11 @@ gulp.task('sleet', function() {
         .pipe(sleet())
         .pipe(gulp.dest('./'));
 });
+
+gulp.task('sleet2', function() {
+    gulp.src('./**/*.sleet')
+        .pipe(sleet({ignore: ['hbs', 'html']})) // do not re-compile when there is a compiled file
+        .pipe(gulp.dest('./'));
+});
+
 ```

@@ -1,7 +1,9 @@
 var path = require('path'),
+    fs = require('fs'),
     through2 = require('through2'),
     sleet = require('sleet'),
-    util = require('gulp-util'),
+    PluginError = require('plugin-error'),
+    replaceExt = require('replace-ext'),
     merge = require('deepmerge');
 
 module.exports = function(opt) {
@@ -13,7 +15,11 @@ module.exports = function(opt) {
         options.filename = file.path;
 
         if (file.isStream()) {
-            return cb(new util.PluginError('gulp-sleet', 'Streaming not supported'));
+            return cb(new PluginError('gulp-sleet', 'Streaming not supported'));
+        }
+
+        if (opt.ignore && opt.ignore.some(i => fs.existsSync(replaceExt(file.path, '.' + i)))) {
+            return cb()
         }
 
         if (file.isBuffer()) {
@@ -21,9 +27,9 @@ module.exports = function(opt) {
                 content = file.contents.toString(enc);
                 result = sleet.compile(content, options);
                 file.contents = new Buffer(result.content);
-                file.path = util.replaceExtension(file.path, '.' + result.extension);
+                file.path = replaceExt(file.path, '.' + result.extension);
             } catch (e) {
-                return cb(new util.PluginError('gulp-sleet', e));
+                return cb(new PluginError('gulp-sleet', file.path + '\n' + e.message));
             }
         }
 
