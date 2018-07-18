@@ -18,7 +18,7 @@ module.exports = function(opt) {
             return cb(new PluginError('gulp-sleet', 'Streaming not supported'));
         }
 
-        if (opt.ignore && opt.ignore.some(i => fs.existsSync(replaceExt(file.path, '.' + i)))) {
+        if (opt && opt.ignore && opt.ignore.some(i => fs.existsSync(replaceExt(file.path, '.' + i)))) {
             return cb()
         }
 
